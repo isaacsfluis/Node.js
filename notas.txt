@@ -1,0 +1,29 @@
+1 primero npm init
+
+crea un json package.json /// investigar mas el tema de licencias, en la ctualidad puse MIT y ficheros
+el fichero mensionado para la creacion fue server.js
+
+2 intalamos el express /// la cual es una dependencia y actualiza el json
+
+npm i express
+si quieres instalar una version especifica utiliza
+npm i express@NUMERO DE version
+npm i espress@4.19.2
+
+3 crear el fichero // en la raiz 
+server.js
+
+4 como se utilizaran la version de dma scrip se debe ir al json y agregar la propiedad de modulo.
+esto se hace agregando una linea sobre la que dice 'main' la linea agregar es
+"type": "module"
+permite utilizar el sistema de import, export//// en lugar de edma requait
+
+5 iniciamos la configuracion importando librerias
+server.js 
+
+6 arrancamos el server con el comando
+///// 6a) modificamos el json en la seccion scrips agregamos *** es la creacion de un atajo segun entiendo
+"dev": "node server.js",
+npm run dev
+
+

@@ -26,4 +26,14 @@ server.js
 "dev": "node server.js",
 npm run dev
 
+7 crear control de variables de entorno
+crear fichero .env /// para la lectura del archivo es necesario el uso de una biblioteca llamada dotenv /// tambien agregarlo al scripts
+para ello ir a la terminar e intalarla recomandacion en modo desarrollo
+npm i -D dotenv
+como se utiliza importandola en el archivo server.js
+correr probar
+
+8 agregar un middle ware 
+//dentro de ello instalr morgan
+npm i -D morgan
 

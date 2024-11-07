@@ -37,3 +37,14 @@ correr probar
 //dentro de ello instalr morgan
 npm i -D morgan
 
+9 instalar un conector de base de datos
+npm install mongoose
+
+10 Crear los modelos 
+Crear la carpeta y los archivos de los modelos
+
+11 recomendacion de una libreria que crear id para evitar ataques
+npm i uuid
+
+11a recomendacion 2 como estamos creando el modulo de usuarios instalar un paquete de encryptacion de password
+npm install bcrypt

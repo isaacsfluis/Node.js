@@ -53,3 +53,6 @@ Thumbs.db
 
 # Otras configuraciones de Node.js
 /.npm
+
+# el workspace de dv
+Node.js.code-workspace

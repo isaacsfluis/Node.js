@@ -2,8 +2,18 @@
 import 'dotenv/config';  // Importa variables de entorno
 import express from 'express';
 import morgan from 'morgan';
+import mongoose from 'mongoose';
 
 const app = express();
+const DB_URL = process.env.NODE_ENV === 'test'
+    ? "mongodb://localhost:27017/ticketing-db-test"
+    : process.env.DB_URL || "mongodb://localhost:27017/ticketing-db";
+
+
+//promesa
+mongoose.connect(DB_URL)
+.then(()=> console.log(`Connect to DB: ${DB_URL}`))// un callback que diga que se ha conectado a la BD
+.catch(err => console.log('Failed to connect to MongoDB', err))
 
 // Middlewares
 app.use(morgan('dev'));  // Logger de solicitudes HTTP

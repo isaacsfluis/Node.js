@@ -3,6 +3,7 @@ import 'dotenv/config';  // Importa variables de entorno
 import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
+import userRoutes from './routs/usersRoutes'
 
 const app = express();
 const DB_URL = process.env.NODE_ENV === 'test'
@@ -20,8 +21,10 @@ app.use(morgan('dev'));  // Logger de solicitudes HTTP
 app.use(express.json()); // Parseo de JSON en el body de las solicitudes
 
 // Rutas
-app.get("/", (req, res) => {
-    res.status(200).send("Hello World, Luis!");
+app.get("/ping", (req, res) => {
+    res.status(200).send("pong");
 });
+
+app.use('/api/users', userRoutes)
 
 export default app;  // Exporta la aplicación configurada para usarla en el servidor

@@ -48,3 +48,13 @@ npm i uuid
 
 11a recomendacion 2 como estamos creando el modulo de usuarios instalar un paquete de encryptacion de password
 npm install bcrypt
+
+12 creacion de la carpeta middlewares
+
+13 agregar biblioteca para la creacion de token
+npm install jsonwebtoken /// comprobar en el json que se instalo la biblioteca
+
+14 creacion de rutas 
+la creacion de la carpeta routs y crear para este ejemplo todas las rutas de los usuarios
+
+

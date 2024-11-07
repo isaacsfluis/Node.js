@@ -50,33 +50,46 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// para actualizar el ticket con parametro
-router.put('/:id', async (req, res) => { 
-    //guardar primero el contenido de la peticion
-
+// Actualizar un ticket usando el id (UUID)
+router.put('/:id', async (req, res) => {
     const updates = req.body;
 
     try {
-        let ticket;
-        ticket = await Ticket.findByIdAndUpdate(req.params.id, updates,{new: true});// esta es una operacion en la BD este es un metodo de mongus pero si fuera otro tocaria  primero buscar actualizarlo y salvarlo
-        if (!ticket) return res.status(404).json('ticket already registered.')
-        res.status(200).json({ ticket: ticket })
+        let ticket = await Ticket.findOneAndUpdate(
+            { id: req.params.id },  // Buscar el ticket por el campo 'id' (UUID)
+            updates,                 // Actualizar con los nuevos datos
+            { new: true }            // Devuelve el ticket actualizado
+        );
+
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+        res.status(200).json({ ticket: ticket });
     } catch (error) {
-        res.status(500).json({ mesage: "Server Error" + error.mesage })
+        res.status(500).json({ message: "Server Error: " + error.message });
     }
 });
 
 //para borrar 
 router.delete('/:id', async (req, res) => { 
-
     try {
         let ticket;
-        ticket = await Ticket.findByIdAndDelete(req.params.id);// esta es una operacion en la BD 
-        if (!ticket) return res.status(404).json('ticket already registered.')
-        res.status(200).json({ ticket: ticket }) 
+        // Usar el campo 'id' en lugar de '_id' para buscar y eliminar el ticket
+        ticket = await Ticket.findOneAndDelete({ id: req.params.id });
+
+        // Si no se encuentra el ticket, se responde con un mensaje adecuado
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        // Si el ticket se elimina con éxito, se devuelve la información del ticket eliminado
+        res.status(200).json({ ticket: ticket }); 
     } catch (error) {
-        res.status(500).json({ mesage: "Server Error" + error.mesage })
+        // Capturar y manejar cualquier error
+        res.status(500).json({ message: "Server Error: " + error.message });
     }
 });
+
+
 
 export default router;

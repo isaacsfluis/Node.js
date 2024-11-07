@@ -3,6 +3,6 @@ Content-Type: application/json
 
 {
     "user": "8db27d1b-e3ed-4f32-a5e7-3248fee49f4f",
-    "title": "danio ne DB",
-    "description": "se quedo una m"
+    "title": "otra12 jodaB",
+    "description": "21como siempre se agrego otro danio"
 }

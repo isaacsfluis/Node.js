@@ -4,6 +4,7 @@ import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import userRoutes from './routs/usersRoutes.js'
+import ticketRoutes from './routs/ticketRoutes.js';
 
 const app = express();
 const DB_URL = process.env.NODE_ENV === 'test'
@@ -26,5 +27,6 @@ app.get("/ping", (req, res) => {
 });
 
 app.use('/api/users', userRoutes)
+app.use('/api/tickets', ticketRoutes)
 
 export default app;  // Exporta la aplicación configurada para usarla en el servidor

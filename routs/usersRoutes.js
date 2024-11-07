@@ -1,7 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
-import User from '../models/User'
+import User from '../models/User.js'
 
 const router = express.Router();
 
@@ -11,6 +11,8 @@ router.post('/signup', async (req, res) => {
     let user;
     user = await User.findOne({ email: req.body.email });
     if (user) return res.status(400).send('User already registered.')
+// Usamos el operador ternario para devolver la respuesta si el usuario ya existe
+// return user ? res.status(400).send('User already registered.') : null;
 
     user = new User({
         name: req.body.name,

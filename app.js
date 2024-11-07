@@ -3,7 +3,7 @@ import 'dotenv/config';  // Importa variables de entorno
 import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
-import userRoutes from './routs/usersRoutes'
+import userRoutes from './routs/usersRoutes.js'
 
 const app = express();
 const DB_URL = process.env.NODE_ENV === 'test'

@@ -8,13 +8,29 @@ import auth from '../middlewares/auth.js';
 const router = express.Router(); /// crear un nuevo router
 
 //para traer todos los tikets
+// get api/tickets?page=1&pagesize=10
 router.get('/', async (req, res) => {
+
+    const pageSize = parseInt(req.query.pageSize) || 10;
+    const page = parseInt(req.query.page) || 1;
+
     try {
         let tickets
-        tickets = await Ticket.find({})// que va a la base de datos de mongus y trae todos 
-        res.status(200).json({ tickets: tickets })
+        tickets = await Ticket.find({})
+            .skip((page - 1) * pageSize)
+            .limit(pageSize);
+
+        const total = await Ticket.countDocuments();
+
+        res.status(200).json({
+            tickets,          // Lista de tickets en la página actual
+            currentPage: page, // Página actual (mantenido como 'currentPage' en lugar de 'page' por claridad)
+            totalPages: Math.ceil(total / pageSize), // Número total de páginas
+            totalTickets: total // Total de tickets en toda la colección
+        });
+        
     } catch (error) {
-        res.status(500).send({ mesage: "Server Error" + error.mesage })
+        res.status(500).send({ mesage: "Server Error" + error.mesage });
     }
 });
 
@@ -41,9 +57,9 @@ router.post('/', auth, async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         let ticket;
-       // ticket = await Ticket.findById(req.params.id);// esta es una operacion en la BD
+        // ticket = await Ticket.findById(req.params.id);// esta es una operacion en la BD
 
-       ticket = await Ticket.findOne({id: req.params.id})
+        ticket = await Ticket.findOne({ id: req.params.id })
 
         if (!ticket) return res.status(404).json('ticket already registered.')
         res.status(200).json({ ticket: ticket })
@@ -74,7 +90,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 //para borrar 
-router.delete('/:id', [auth, admin,], async (req, res) => { 
+router.delete('/:id', [auth, admin,], async (req, res) => {
     try {
         let ticket;
         // Usar el campo 'id' en lugar de '_id' para buscar y eliminar el ticket
@@ -86,7 +102,7 @@ router.delete('/:id', [auth, admin,], async (req, res) => {
         }
 
         // Si el ticket se elimina con éxito, se devuelve la información del ticket eliminado
-        res.status(200).json({ ticket: ticket }); 
+        res.status(200).json({ ticket: ticket });
     } catch (error) {
         // Capturar y manejar cualquier error
         res.status(500).json({ message: "Server Error: " + error.message });

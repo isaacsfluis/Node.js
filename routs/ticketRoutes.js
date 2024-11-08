@@ -1,6 +1,9 @@
 import express from 'express'; // frawor de usuario
 import User from '../models/Ticket.js'
 import Ticket from '../models/Ticket.js';
+import admin from '../middlewares/admin.js';
+import auth from '../middlewares/auth.js';
+
 
 const router = express.Router(); /// crear un nuevo router
 
@@ -15,11 +18,11 @@ router.get('/', async (req, res) => {
     }
 });
 
-//crear una nueva ruta
-router.post('/', async (req, res) => {
+//crear un nuevo ticket
+router.post('/', auth, async (req, res) => {
     let ticket;
     ticket = new User({ /// aqui creo el objeto'ticket' y luego salvar en el try
-        user: req.body.user,
+        user: req.body._id,
         title: req.body.title,
         description: req.body.description,
         priority: req.body.priority,
@@ -51,7 +54,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Actualizar un ticket usando el id (UUID)
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const updates = req.body;
 
     try {
@@ -71,7 +74,7 @@ router.put('/:id', async (req, res) => {
 });
 
 //para borrar 
-router.delete('/:id', async (req, res) => { 
+router.delete('/:id', [auth, admin,], async (req, res) => { 
     try {
         let ticket;
         // Usar el campo 'id' en lugar de '_id' para buscar y eliminar el ticket

@@ -3,42 +3,23 @@ import User from '../models/Ticket.js'
 import Ticket from '../models/Ticket.js';
 import admin from '../middlewares/admin.js';
 import auth from '../middlewares/auth.js';
+import buildfilter from '../middlewares/filter.js';
+import pagination from '../middlewares/pagination.js';
 
 
 const router = express.Router(); /// crear un nuevo router
 
 //para traer todos los tikets
 // get api/tickets?page=1&pagesize=10
-router.get('/', async (req, res) => {
-
-    const pageSize = parseInt(req.query.pageSize) || 10;
-    const page = parseInt(req.query.page) || 1;
-
-    try {
-        let tickets
-        tickets = await Ticket.find({})
-            .skip((page - 1) * pageSize)
-            .limit(pageSize);
-
-        const total = await Ticket.countDocuments();
-
-        res.status(200).json({
-            tickets,          // Lista de tickets en la página actual
-            currentPage: page, // Página actual (mantenido como 'currentPage' en lugar de 'page' por claridad)
-            totalPages: Math.ceil(total / pageSize), // Número total de páginas
-            totalTickets: total // Total de tickets en toda la colección
-        });
-        
-    } catch (error) {
-        res.status(500).send({ mesage: "Server Error" + error.mesage });
-    }
+router.get('/', buildfilter, pagination(Ticket), async (req, res) => {
+    res.status(200).json(req.paginatedResults)
 });
 
 //crear un nuevo ticket
 router.post('/', auth, async (req, res) => {
     let ticket;
-    ticket = new User({ /// aqui creo el objeto'ticket' y luego salvar en el try
-        user: req.body._id,
+    ticket = new Ticket({ /// aqui creo el objeto'ticket' y luego salvar en el try
+        user: req.user._id,
         title: req.body.title,
         description: req.body.description,
         priority: req.body.priority,

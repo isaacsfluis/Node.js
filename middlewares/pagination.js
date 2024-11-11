@@ -15,7 +15,9 @@ export default function pagination(model) {
             next();
 
         } catch (error) {
-            res.status(500).send({ message: "Server Error: " + error.message });
+            const err = new Error("Server Error: " + error.message);
+            err.status = 500; // Define el código de estado
+            next(err);
         }
     }
 };

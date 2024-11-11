@@ -4,13 +4,13 @@ import jwt from 'jsonwebtoken';
 export default function auth(req,res,next){
     const token  = req.header('Authorization').replace('Bearer ',"");
     //si token no existe
-    if (!token) return res.status(401).send('Acces denied. No token provided');
+    if (!token) return next(new Error('Access denied. No token provided'));
 
     try {
         const verified = jwt.verify(token,process.env.JWR_SECRET);
         req.user = verified;
         next();
     } catch (error) {
-        res.status(400).send('Acces denied. No token provided');
+        next(new Error('Access denied. Invalid token'));
     }
 }

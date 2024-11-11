@@ -11,7 +11,7 @@ const router = express.Router(); /// crear un nuevo router
 
 //para traer todos los tikets
 // get api/tickets?page=1&pagesize=10
-router.get('/', buildfilter, pagination(Ticket), async (req, res) => {
+router.get('/', buildfilter, pagination(Ticket), async (req, res)  => {
     res.status(200).json(req.paginatedResults)
 });
 

@@ -31,7 +31,7 @@ router.post('/signup', async (req, res) => {
             { expiresIn: '1h', }
         );
 
-        res.header('Authorization', token).send({
+        res.status(201).header('Authorization', token).send({
             user: {
                 name: user.name,
                 email: user.email,

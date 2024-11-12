@@ -14,3 +14,32 @@
   message: 'Access denied. Invalid token',
   timestamp: '2024-11-10T19:12:05.254Z'
 }
+{
+  metadata: Error: Access denied. Invalid token
+      at auth (C:\Users\Isaacs\Documents\Node.js\middlewares\auth.js:14:14)
+      at Layer.handle [as handle_request] (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\layer.js:95:5)
+      at next (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\route.js:149:13)
+      at Route.dispatch (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\route.js:119:3)
+      at Layer.handle [as handle_request] (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\layer.js:95:5)
+      at C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:284:15
+      at Function.process_params (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:346:12)
+      at next (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:280:10)
+      at Function.handle (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:175:3)
+      at router (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:47:12)
+      at Layer.handle [as handle_request] (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\layer.js:95:5)
+      at trim_prefix (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:328:13)
+      at C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:286:9
+      at Function.process_params (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:346:12)
+      at next (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:280:10)
+      at C:\Users\Isaacs\Documents\Node.js\node_modules\body-parser\lib\read.js:137:5
+      at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+      at invokeCallback (C:\Users\Isaacs\Documents\Node.js\node_modules\raw-body\index.js:238:16)
+      at done (C:\Users\Isaacs\Documents\Node.js\node_modules\raw-body\index.js:227:7)
+      at IncomingMessage.onEnd (C:\Users\Isaacs\Documents\Node.js\node_modules\raw-body\index.js:287:7)
+      at IncomingMessage.emit (node:events:519:28)
+      at endReadableNT (node:internal/streams/readable:1696:12)
+      at processTicksAndRejections (node:internal/process/task_queues:82:21),
+  level: 'error',
+  message: 'Access denied. Invalid token',
+  timestamp: '2024-11-12T13:23:45.762Z'
+}

@@ -20,12 +20,12 @@ import cors from "cors";
 import compression from 'compression';
 
 const app = express();
+// Si el entorno es de producción, se conecta a MongoDB Atlas.
 const DB_URL = process.env.NODE_ENV === 'test'
     ? "mongodb://localhost:27017/ticketing-db-test"  // Para pruebas
     : process.env.NODE_ENV === 'prod' 
-    ? process.env.DB_URL || "mongodb://localhost:27017/ticketing-db-prod"  // Para producción, usa process.env.DB_URL o la URL por defecto de producción
-    : "mongodb://localhost:27017/ticketing-db";  // Por defecto (desarrollo)
-
+    ? process.env.DB_URL  // Para producción, usa la URL de MongoDB Atlas configurada en .env
+    : "mongodb://localhost:27017/ticketing-db";  // Para desarrollo, sigue usando la base de datos local
 
 //promesa
 mongoose.connect(DB_URL)

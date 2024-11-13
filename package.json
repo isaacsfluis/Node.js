@@ -5,6 +5,7 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
+    "db:populate": "node scripts/populateDB.js",
     "start": "cross-env NODE_ENV=prod node server.js",
     "dev": "cross-env NODE_ENV=dev node --watch server.js",
     "test": "cross-env NODE_ENV=test jest --runInBand"
@@ -13,8 +14,12 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "compression": "^1.7.5",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.0",
     "uuid": "^11.0.2",

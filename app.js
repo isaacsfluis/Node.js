@@ -1,11 +1,23 @@
 // lo voy a realacionar todo lo relacionado a express
 import 'dotenv/config';  // Importa variables de entorno
 import express from 'express';
-import morgan from 'morgan';
+
+//Base de datos
 import mongoose from 'mongoose';
+
+//rutas
 import userRoutes from './routs/usersRoutes.js'
 import ticketRoutes from './routs/ticketRoutes.js';
+
+//middleware
 import error from './middlewares/error.js';
+import morgan from 'morgan'; //registro de solicitudes HTTP
+import limiter from './helpers/rateLimit.js';
+
+// dependencias de despligue
+import helmet from 'helmet';
+import cors from "cors";
+import compression from 'compression';
 
 const app = express();
 const DB_URL = process.env.NODE_ENV === 'test'
@@ -20,6 +32,14 @@ mongoose.connect(DB_URL)
 
 // Middlewares
 app.use(morgan('dev'));  // Logger de solicitudes HTTP
+app.use(helmet());
+app.use(cors());
+
+if (process.env.NODE_ENV === 'prod'){
+    app.use(compression());
+    app.use(limiter); //middleware para el numero de peticiones
+}
+
 app.use(express.json()); // Parseo de JSON en el body de las solicitudes
 
 // Rutas

@@ -99,3 +99,17 @@ crear los archivos
 jest.config.js
 crear la carpeta test
 
+
+
+16 despliegue
+
+instalar 
+    helmet //// para que no diga que version o informacion 
+    cors  //// para que se comunique entre servidore
+    compression /// comprime las respuesta que genere el api
+crear un helper para limitar el numero de solicitudes de un usuario al server
+instalar
+    express-rate-limit
+
+
+en los esquemas de BD crear un scrip que poble la BD para pruebas o que otros desarrolladores lo utilicen, en el servidor de desarrollo -- creando una carpeta llamada scripts

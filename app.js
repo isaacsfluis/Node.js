@@ -46,6 +46,7 @@ app.use(express.json()); // Parseo de JSON en el body de las solicitudes
 
 // Rutas
 app.get("/ping", (req, res) => { res.status(200).send("pong"); });
+app.get("/", (req, res) => { res.status(200).send("Exitoso"); });
 
 //Rutas de error
 app.get('/test-error', (req, res, next) => {

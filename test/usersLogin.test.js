@@ -6,13 +6,8 @@ import User from "../models/User.js";
 
 describe('User API Login', () => {
 
-    afterAll(async () => {
-        await mongoose.connection.close(); // Cierra la conexión con MongoDB
-        server.close(); // Cierra el servidor después de las pruebas
-        //setTimeout(() => process.exit(0), 1000); // Forzar el cierre después de 1 segundo
-    });
-
-    test('Login a user', async () => { // Cambiado a "test" en minúsculas
+    beforeAll(async () => {
+        await User.deleteMany(); // Limpia la colección de usuarios antes de las pruebas
         const response = await request(app)
             .post('/api/users/signup')
             .send({
@@ -21,6 +16,15 @@ describe('User API Login', () => {
                 password: '123456789',
                 role: 'user'
             });
+    });
+
+    afterAll(async () => {
+        await mongoose.connection.close(); // Cierra la conexión con MongoDB
+        server.close(); // Cierra el servidor después de las pruebas
+        //setTimeout(() => process.exit(0), 1000); // Forzar el cierre después de 1 segundo
+    });
+
+    test('Login a user', async () => { // Cambiado a "test" en minúsculas
 
         const testlogin = await request(app)
             .post('/api/users/login')

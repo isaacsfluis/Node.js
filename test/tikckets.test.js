@@ -51,7 +51,7 @@ describe('Tickets API', () => {
         expect(response.status).toBe(201);
         expect(response.body).toHaveProperty('ticket');
         expect(response.body.ticket).toHaveProperty('title', 'Test Ticket')
-        expect(response.body.ticket).not.toHaveProperty('_id')
+        expect(response.body.ticket).not.toHaveProperty('_id') 
     });
 
     test('Get all ticket', async () => {

@@ -16,7 +16,7 @@ describe('User API', () => {
     });
 
     test('create a new user', async () => { // Cambiado a "test" en minúsculas
-        const response = await request(app)
+        const response = await request(app) 
             .post('/api/users/signup')
             .send({
                 name: 'Test User',

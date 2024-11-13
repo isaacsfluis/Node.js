@@ -5,6 +5,7 @@ import admin from '../middlewares/admin.js';
 import auth from '../middlewares/auth.js';
 import buildfilter from '../middlewares/filter.js';
 import pagination from '../middlewares/pagination.js';
+import ticketSchema from '../validations/ticketValidation.js';
 
 
 const router = express.Router(); /// crear un nuevo router
@@ -17,6 +18,13 @@ router.get('/', buildfilter, pagination(Ticket), async (req, res)  => {
 
 //crear un nuevo ticket
 router.post('/', auth, async (req, res) => {
+
+    const {error} = ticketSchema.validate(req.body);
+
+    if (error){
+        return res.status(400).json({mesage: error.details[0].message})
+    }
+
     let ticket;
     ticket = new Ticket({ /// aqui creo el objeto'ticket' y luego salvar en el try
         user: req.user._id,

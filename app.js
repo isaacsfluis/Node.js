@@ -21,21 +21,23 @@ import compression from 'compression';
 
 const app = express();
 const DB_URL = process.env.NODE_ENV === 'test'
-    ? "mongodb://localhost:27017/ticketing-db-test"
-    : process.env.DB_URL || "mongodb://localhost:27017/ticketing-db";
+    ? "mongodb://localhost:27017/ticketing-db-test"  // Para pruebas
+    : process.env.NODE_ENV === 'prod' 
+    ? process.env.DB_URL || "mongodb://localhost:27017/ticketing-db-prod"  // Para producción, usa process.env.DB_URL o la URL por defecto de producción
+    : "mongodb://localhost:27017/ticketing-db";  // Por defecto (desarrollo)
 
 
 //promesa
 mongoose.connect(DB_URL)
-.then(()=> console.log(`Connect to DB: ${DB_URL}`))// un callback que diga que se ha conectado a la BD
-.catch(err => console.log('Failed to connect to MongoDB', err))
-
+    .then(() => console.log(`Connect to DB: ${DB_URL}`))// un callback que diga que se ha conectado a la BD
+    .catch(err => console.log('Failed to connect to MongoDB', err.message))
+    
 // Middlewares
 app.use(morgan('dev'));  // Logger de solicitudes HTTP
 app.use(helmet());
 app.use(cors());
 
-if (process.env.NODE_ENV === 'prod'){
+if (process.env.NODE_ENV === 'prod') {
     app.use(compression());
     app.use(limiter); //middleware para el numero de peticiones
 }
@@ -43,7 +45,7 @@ if (process.env.NODE_ENV === 'prod'){
 app.use(express.json()); // Parseo de JSON en el body de las solicitudes
 
 // Rutas
-app.get("/ping", (req, res) => {res.status(200).send("pong");});
+app.get("/ping", (req, res) => { res.status(200).send("pong"); });
 
 //Rutas de error
 app.get('/test-error', (req, res, next) => {

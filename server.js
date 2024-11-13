@@ -10,7 +10,9 @@ const port = process.env.PORT || 3000;  // Usa el puerto de las variables de ent
 // Inicia el servidor y guarda la referencia
 const server = app.listen(port, () => {
     console.log(`Environment: ${process.env.NODE_ENV}`);
-    console.log(`Server is running on http://localhost:${port}`);
+    if(process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test'){
+        console.log(`Server is running on http://localhost:${port}`);
+    }
 });
 
 // Exporta el servidor para cerrarlo en las pruebas

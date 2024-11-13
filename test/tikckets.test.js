@@ -7,6 +7,7 @@ import User from "../models/User.js";
 
 describe('Tickets API', () => {
     let token;
+    let userId; // Variable para almacenar el id del usuario
 
     beforeAll(async () => {
         const response = await request(app)
@@ -19,6 +20,10 @@ describe('Tickets API', () => {
             });
 
         token = response.headers.authorization;
+
+        // Recupera el usuario recién creado para obtener su id
+        const user = await User.findOne({ email: 'userticket@gmail.com' });
+        userId = user._id; // Guarda el id del usuario para usarlo en las pruebas
     });
 
     beforeEach(async () => {
@@ -36,6 +41,7 @@ describe('Tickets API', () => {
             .post('/api/tickets')
             .set('Authorization', token)
             .send({
+                user: userId,  // Usa el id del usuario en la creación del ticket
                 title: 'Test Ticket',
                 description: "Test tickets description",
                 priority: 'high',

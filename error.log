@@ -43,3 +43,19 @@
   message: 'Access denied. Invalid token',
   timestamp: '2024-11-12T13:23:45.762Z'
 }
+{
+  metadata: Error: Access denied. Invalid token
+      at auth (file:///C:/Users/Isaacs/Documents/Node.js/middlewares/auth.js:14:14)
+      at Layer.handle [as handle_request] (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\layer.js:95:5)
+      at next (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\route.js:149:13)
+      at Route.dispatch (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\route.js:119:3)
+      at Layer.handle [as handle_request] (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\layer.js:95:5)
+      at C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:284:15
+      at Function.process_params (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:346:12)
+      at next (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:280:10)
+      at Function.handle (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:175:3)
+      at router (C:\Users\Isaacs\Documents\Node.js\node_modules\express\lib\router\index.js:47:12),
+  level: 'error',
+  message: 'Access denied. Invalid token',
+  timestamp: '2024-11-13T13:37:04.953Z'
+}
